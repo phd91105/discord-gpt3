@@ -5,10 +5,12 @@ export const gpt3 = (client: Client): void => {
     const mess = message.content.split(' ');
     if (mess[0].toLowerCase() === '!gpt') {
       try {
-        const msgRef = await message.reply('...');
+        const msgRef = await message.reply('🤔');
         await global.openai.sendMessage(message.content.replace('!gpt', ''), {
           onProgress: async (partialResponse: { text: string }) => {
-            await msgRef.edit(partialResponse.text);
+            if (partialResponse.text) {
+              await msgRef.edit(partialResponse.text);
+            }
           },
         });
       } catch (e) {
