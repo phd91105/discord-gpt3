@@ -25,7 +25,6 @@
     "@types/lodash": "^4.14.191",
     "@types/node": "^18.11.7",
     "@types/tough-cookie": "^4.0.2",
-    "@types/user-agents": "^1.0.2",
     "@typescript-eslint/eslint-plugin": "^5.41.0",
     "@typescript-eslint/parser": "^5.41.0",
     "eslint": "^8.26.0",
@@ -49,11 +48,7 @@
     "libsodium-wrappers": "^0.7.11",
     "lodash": "^4.17.21",
     "module-alias": "^2.2.2",
-    "puppeteer": "^19.7.1",
-    "puppeteer-extra": "^3.3.4",
-    "puppeteer-extra-plugin-stealth": "^2.11.1",
     "reconlx": "^2.5.6",
-    "tough-cookie": "^4.1.2",
-    "user-agents": "^1.0.1295"
+    "tough-cookie": "^4.1.2"
   }
 }
