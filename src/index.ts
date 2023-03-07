@@ -1,4 +1,4 @@
-import { ChatGPTUnofficialProxyAPI } from 'chatgpt';
+import { ChatGPTAPI, ChatGPTUnofficialProxyAPI } from 'chatgpt';
 import { CronJob } from 'cron';
 
 import app from './app';
@@ -15,10 +15,13 @@ const refreshTokenGpt = new CronJob('0 */5 * * *', async function () {
 
 const main = async () => {
   try {
-    const { accessToken } = await getAccessToken();
+    // const { accessToken } = await getAccessToken();
 
-    global.openai = new ChatGPTUnofficialProxyAPI({
-      accessToken,
+    global.openai = new ChatGPTAPI({
+      apiKey: process.env.CHAT_GPT_KEY?.trim() as string,
+      completionParams: {
+        model: 'gpt-3.5-turbo',
+      },
     });
 
     discord.on('ready', () => {
@@ -28,7 +31,7 @@ const main = async () => {
     app.listen(port);
     console.info(`Server on http://localhost:${port}`);
 
-    refreshTokenGpt.start();
+    // refreshTokenGpt.start();
   } catch (error) {
     console.error(error);
   }
