@@ -18,5 +18,5 @@ export const bingChat = async (message: string) => {
   );
 
   parentMessageId = data.messageId;
-  return data.response;
+  return data.response.replace(/\[\^\d\^\]*/g, '');
 };
