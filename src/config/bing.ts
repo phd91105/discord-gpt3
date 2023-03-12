@@ -1,22 +1,18 @@
 import axios from 'axios';
 
 const client = axios.create();
-let parentMessageId = '';
+export const messageStorage: { [key: string]: any } = {};
 
-export const bingChat = async (message: string) => {
-  const { data } = await client.post(
-    'https://bing.khanh.lol/completion',
-    {
-      parentMessageId,
-      prompt: message,
-    },
-    {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    },
-  );
+export const bingChat = async (message: string, userId: string) => {
+  const { data } = await client.post('https://bing.khanh.lol/completion', {
+    parentMessageId: messageStorage[userId]?.parentMessageId,
+    prompt: message,
+  });
 
-  parentMessageId = data.messageId;
-  return data.response.replace(/\[\^\d\^\]*/g, '');
+  messageStorage[userId] = { parentMessageId: data.messageId };
+  return data.response.replace(/\[\^\d+\^\]*/g, '');
+};
+
+export const reset = (userId: string) => {
+  messageStorage[userId] = {};
 };
